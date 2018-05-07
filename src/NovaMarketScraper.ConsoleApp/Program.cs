@@ -9,11 +9,20 @@ namespace NovaMarketScraper.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var webDriver = new ChromeDriver();
-
-            webDriver.Navigate().GoToUrl("https://www.novaragnarok.com/?module=vending");
+            var driver = new ChromeDriver(".");
 
             Console.ReadLine();
+        }
+
+        static void NovaLogin(IWebDriver driver, string username, string password)
+        {
+            driver.Navigate().GoToUrl("https://www.novaragnarok.com/?module=vending");
+
+            var txtUsername = driver.FindElement(By.Name("username"));
+            txtUsername.SendKeys(username);
+
+            var txtPassword = driver.FindElement(By.Name("password"));
+            txtPassword.SendKeys(password);
         }
     }
 }
