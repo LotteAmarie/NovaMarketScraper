@@ -1,5 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace NovaMarketScraper.ConsoleApp
 {
@@ -7,15 +9,11 @@ namespace NovaMarketScraper.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Item item = new Item 
-            {
-                Id = 210,
-                Name = "Test Object"
-            };
+            var webDriver = new ChromeDriver();
 
-            string json = JsonConvert.SerializeObject(item, Formatting.Indented);
+            webDriver.Navigate().GoToUrl("https://www.novaragnarok.com/?module=vending");
 
-            System.Console.WriteLine(json);
+            Console.ReadLine();
         }
     }
 }

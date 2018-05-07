@@ -1,14 +1,16 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "883f5ab0e357ef56d00e5851b3cee30b45ba651b"
+    "signature": "8a8651c0043299b712325542ce5d568cd0d8b6b4"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "NovaMarketScraper.ConsoleApp/1.0.0": {
         "dependencies": {
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "11.0.2",
+          "Selenium.Chrome.WebDriver": "2.38.0",
+          "Selenium.WebDriver": "3.11.2"
         },
         "runtime": {
           "NovaMarketScraper.ConsoleApp.dll": {}
@@ -17,6 +19,15 @@
       "Newtonsoft.Json/11.0.2": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Selenium.Chrome.WebDriver/2.38.0": {},
+      "Selenium.WebDriver/3.11.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.dll": {}
         }
       }
     }
@@ -33,6 +44,20 @@
       "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
+    "Selenium.Chrome.WebDriver/2.38.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fTghjhnyXbe4GGunFiEey72KyUkS7XoVUizbqggJW++UNCE0dslTKVU3XBdLu4n2qbi8y/1cW9PWfyyfv0JQWw==",
+      "path": "selenium.chrome.webdriver/2.38.0",
+      "hashPath": "selenium.chrome.webdriver.2.38.0.nupkg.sha512"
+    },
+    "Selenium.WebDriver/3.11.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q+6N4OOMC6zEW9k7AQM9KyspSYAOtA+rzOcRI266S7EGhTaQZEMxEX0Pdw+pjF1aDWmtEoGjwCmKAoa2v2zOsw==",
+      "path": "selenium.webdriver/3.11.2",
+      "hashPath": "selenium.webdriver.3.11.2.nupkg.sha512"
     }
   }
 }
