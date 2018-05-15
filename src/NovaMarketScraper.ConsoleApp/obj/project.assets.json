@@ -206,10 +206,19 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "PhantomJS/2.1.1": {
+        "type": "package"
+      },
       "Selenium.Chrome.WebDriver/2.38.0": {
         "type": "package",
         "build": {
           "build/Selenium.Chrome.WebDriver.targets": {}
+        }
+      },
+      "Selenium.PhantomJS.WebDriver/2.1.1": {
+        "type": "package",
+        "build": {
+          "build/Selenium.PhantomJS.WebDriver.targets": {}
         }
       },
       "Selenium.WebDriver/3.11.2": {
@@ -712,6 +721,68 @@
         "newtonsoft.json.nuspec"
       ]
     },
+    "PhantomJS/2.1.1": {
+      "sha512": "31xkN06TjBGQ9/8sGkm8IAN4DM/gMDChryu9Pp1ng9OK/xLPL2ZNbAgRCaB2g9vDkUDvhHjBEtP9JRenMDiHUg==",
+      "type": "package",
+      "path": "phantomjs/2.1.1",
+      "files": [
+        "content/phantomjs-license.txt",
+        "phantomjs.2.1.1.nupkg.sha512",
+        "phantomjs.nuspec",
+        "tools/install.ps1",
+        "tools/phantomjs/ChangeLog",
+        "tools/phantomjs/LICENSE.BSD",
+        "tools/phantomjs/README.md",
+        "tools/phantomjs/examples/arguments.js",
+        "tools/phantomjs/examples/child_process-examples.js",
+        "tools/phantomjs/examples/colorwheel.js",
+        "tools/phantomjs/examples/countdown.js",
+        "tools/phantomjs/examples/detectsniff.js",
+        "tools/phantomjs/examples/echoToFile.js",
+        "tools/phantomjs/examples/features.js",
+        "tools/phantomjs/examples/fibo.js",
+        "tools/phantomjs/examples/hello.js",
+        "tools/phantomjs/examples/injectme.js",
+        "tools/phantomjs/examples/loadspeed.js",
+        "tools/phantomjs/examples/loadurlwithoutcss.js",
+        "tools/phantomjs/examples/modernizr.js",
+        "tools/phantomjs/examples/module.js",
+        "tools/phantomjs/examples/netlog.js",
+        "tools/phantomjs/examples/netsniff.js",
+        "tools/phantomjs/examples/openurlwithproxy.js",
+        "tools/phantomjs/examples/outputEncoding.js",
+        "tools/phantomjs/examples/page_events.js",
+        "tools/phantomjs/examples/pagecallback.js",
+        "tools/phantomjs/examples/phantomwebintro.js",
+        "tools/phantomjs/examples/post.js",
+        "tools/phantomjs/examples/postjson.js",
+        "tools/phantomjs/examples/postserver.js",
+        "tools/phantomjs/examples/printenv.js",
+        "tools/phantomjs/examples/printheaderfooter.js",
+        "tools/phantomjs/examples/printmargins.js",
+        "tools/phantomjs/examples/rasterize.js",
+        "tools/phantomjs/examples/render_multi_url.js",
+        "tools/phantomjs/examples/responsive-screenshot.js",
+        "tools/phantomjs/examples/run-jasmine.js",
+        "tools/phantomjs/examples/run-jasmine2.js",
+        "tools/phantomjs/examples/run-qunit.js",
+        "tools/phantomjs/examples/scandir.js",
+        "tools/phantomjs/examples/server.js",
+        "tools/phantomjs/examples/serverkeepalive.js",
+        "tools/phantomjs/examples/simpleserver.js",
+        "tools/phantomjs/examples/sleepsort.js",
+        "tools/phantomjs/examples/stdin-stdout-stderr.js",
+        "tools/phantomjs/examples/universe.js",
+        "tools/phantomjs/examples/unrandomize.js",
+        "tools/phantomjs/examples/useragent.js",
+        "tools/phantomjs/examples/version.js",
+        "tools/phantomjs/examples/waitfor.js",
+        "tools/phantomjs/examples/walk_through_frames.js",
+        "tools/phantomjs/phantomjs.exe",
+        "tools/phantomjs/third-party.txt",
+        "tools/uninstall.ps1"
+      ]
+    },
     "Selenium.Chrome.WebDriver/2.38.0": {
       "sha512": "fTghjhnyXbe4GGunFiEey72KyUkS7XoVUizbqggJW++UNCE0dslTKVU3XBdLu4n2qbi8y/1cW9PWfyyfv0JQWw==",
       "type": "package",
@@ -721,6 +792,17 @@
         "driver/chromedriver.exe",
         "selenium.chrome.webdriver.2.38.0.nupkg.sha512",
         "selenium.chrome.webdriver.nuspec"
+      ]
+    },
+    "Selenium.PhantomJS.WebDriver/2.1.1": {
+      "sha512": "RkbBQqVh47WZWQjwl5iM/FFzY6ST89w9Pts31Vft36H/10gCLipRoSsM/ewkSm8EUWibagOVyAOQDqsL5RSzhw==",
+      "type": "package",
+      "path": "selenium.phantomjs.webdriver/2.1.1",
+      "files": [
+        "build/Selenium.PhantomJS.WebDriver.targets",
+        "driver/phantomjs.exe",
+        "selenium.phantomjs.webdriver.2.1.1.nupkg.sha512",
+        "selenium.phantomjs.webdriver.nuspec"
       ]
     },
     "Selenium.WebDriver/3.11.2": {
@@ -745,7 +827,9 @@
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
       "Newtonsoft.Json >= 11.0.2",
+      "PhantomJS >= 2.1.1",
       "Selenium.Chrome.WebDriver >= 2.38.0",
+      "Selenium.PhantomJS.WebDriver >= 2.1.1",
       "Selenium.WebDriver >= 3.11.2"
     ]
   },
@@ -802,9 +886,17 @@
             "target": "Package",
             "version": "[11.0.2, )"
           },
+          "PhantomJS": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
           "Selenium.Chrome.WebDriver": {
             "target": "Package",
             "version": "[2.38.0, )"
+          },
+          "Selenium.PhantomJS.WebDriver": {
+            "target": "Package",
+            "version": "[2.1.1, )"
           },
           "Selenium.WebDriver": {
             "target": "Package",

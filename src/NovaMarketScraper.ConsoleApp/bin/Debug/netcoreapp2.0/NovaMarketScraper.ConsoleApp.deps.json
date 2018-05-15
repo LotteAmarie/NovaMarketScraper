@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "8a8651c0043299b712325542ce5d568cd0d8b6b4"
+    "signature": "52d932993eb1668ec6dd7030313365a33f8eeb73"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,9 @@
       "NovaMarketScraper.ConsoleApp/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
+          "PhantomJS": "2.1.1",
           "Selenium.Chrome.WebDriver": "2.38.0",
+          "Selenium.PhantomJS.WebDriver": "2.1.1",
           "Selenium.WebDriver": "3.11.2"
         },
         "runtime": {
@@ -21,7 +23,9 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "PhantomJS/2.1.1": {},
       "Selenium.Chrome.WebDriver/2.38.0": {},
+      "Selenium.PhantomJS.WebDriver/2.1.1": {},
       "Selenium.WebDriver/3.11.2": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
@@ -45,12 +49,26 @@
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
     },
+    "PhantomJS/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-31xkN06TjBGQ9/8sGkm8IAN4DM/gMDChryu9Pp1ng9OK/xLPL2ZNbAgRCaB2g9vDkUDvhHjBEtP9JRenMDiHUg==",
+      "path": "phantomjs/2.1.1",
+      "hashPath": "phantomjs.2.1.1.nupkg.sha512"
+    },
     "Selenium.Chrome.WebDriver/2.38.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-fTghjhnyXbe4GGunFiEey72KyUkS7XoVUizbqggJW++UNCE0dslTKVU3XBdLu4n2qbi8y/1cW9PWfyyfv0JQWw==",
       "path": "selenium.chrome.webdriver/2.38.0",
       "hashPath": "selenium.chrome.webdriver.2.38.0.nupkg.sha512"
+    },
+    "Selenium.PhantomJS.WebDriver/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RkbBQqVh47WZWQjwl5iM/FFzY6ST89w9Pts31Vft36H/10gCLipRoSsM/ewkSm8EUWibagOVyAOQDqsL5RSzhw==",
+      "path": "selenium.phantomjs.webdriver/2.1.1",
+      "hashPath": "selenium.phantomjs.webdriver.2.1.1.nupkg.sha512"
     },
     "Selenium.WebDriver/3.11.2": {
       "type": "package",
