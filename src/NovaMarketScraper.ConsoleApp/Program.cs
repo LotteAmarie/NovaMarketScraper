@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using Newtonsoft.Json;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.PhantomJS;
+using System.Linq;
+using System.Net;
+using HtmlAgilityPack;
 
 namespace NovaMarketScraper.ConsoleApp
 {
@@ -13,8 +11,37 @@ namespace NovaMarketScraper.ConsoleApp
     {
         static void Main(string[] args)
         {
+            var items = LoadItems();
+
+            string itemName = Console.ReadLine();
+
+            var item = items.FirstOrDefault(x => x.Name.ToLower() == itemName.ToLower());
+
+            using (WebClient client = new WebClient())
+            {
+                string html = client.DownloadString(BuildMarketUrl(item));
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                System.Console.WriteLine(html);
+
+                // var query = from table in doc.DocumentNode.SelectNodes("//table").Cast<HtmlNode>()
+                //             from row in table.SelectNodes("tr").Cast<HtmlNode>()
+                //             from cell in row.SelectNodes("th|td").Cast<HtmlNode>()
+                //             select new { Table = table.Id, CellText = cell.InnerHtml };
+                
+                // foreach (var cell in query)
+                // {
+                //     Console.WriteLine("{0}: {1}", cell.Table, cell.CellText);
+                // }
+            }
+
             Console.ReadLine();
         }
+
+        public static string BuildMarketUrl(Item item) =>
+            $"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}";
 
         public static IEnumerable<Item> LoadItems()
         {
