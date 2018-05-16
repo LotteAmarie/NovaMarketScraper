@@ -4,11 +4,6 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2"/>
-    <PackageReference Include="Selenium.WebDriver" Version="3.11.2"/>
-    <PackageReference Include="Selenium.Chrome.WebDriver" Version="2.38.0"/>
-    <PackageReference Include="Selenium.PhantomJS.WebDriver" Version="2.1.1"/>
-    <PackageReference Include="PhantomJS" Version="2.1.1"/>
     <PackageReference Include="HtmlAgilityPack" Version="1.8.2"/>
   </ItemGroup>
 </Project>

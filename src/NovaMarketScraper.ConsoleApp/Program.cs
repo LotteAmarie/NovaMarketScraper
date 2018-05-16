@@ -17,28 +17,78 @@ namespace NovaMarketScraper.ConsoleApp
 
             var item = items.FirstOrDefault(x => x.Name.ToLower() == itemName.ToLower());
 
-            using (WebClient client = new WebClient())
+            var itemHistory = CreateItemHistory(item);
+
+            foreach (var statistic in itemHistory.WeeklyStatistics)
             {
-                string html = client.DownloadString(BuildMarketUrl(item));
-
-                var doc = new HtmlDocument();
-                doc.LoadHtml(html);
-
-                System.Console.WriteLine(html);
-
-                // var query = from table in doc.DocumentNode.SelectNodes("//table").Cast<HtmlNode>()
-                //             from row in table.SelectNodes("tr").Cast<HtmlNode>()
-                //             from cell in row.SelectNodes("th|td").Cast<HtmlNode>()
-                //             select new { Table = table.Id, CellText = cell.InnerHtml };
-                
-                // foreach (var cell in query)
-                // {
-                //     Console.WriteLine("{0}: {1}", cell.Table, cell.CellText);
-                // }
+                System.Console.WriteLine(statistic);
             }
 
             Console.ReadLine();
         }
+
+        public static ItemHistory CreateItemHistory(Item item)
+        {
+            // Fetch HTML
+            var web = new HtmlWeb();
+            var doc = web.Load(BuildMarketUrl(item));
+
+            // Scrape weekly/monthly entries
+            var weeklyEntries = new List<int>();
+            var monthlyEntries = new List<int>();
+            for (int i = 2; i < 7; i++)
+            {
+                var weeklyNode = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[1]/tbody/tr[1]/td[{i}]");
+                
+                var monthlyNode = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[1]/tbody/tr[2]/td[{i}]");
+
+                if (int.TryParse(GetDigits(weeklyNode.InnerText), out int weeklyEntry))
+                {
+                    weeklyEntries.Add(weeklyEntry);
+                }
+
+                if (int.TryParse(GetDigits(weeklyNode.InnerText), out int monthlyEntry))
+                {
+                    monthlyEntries.Add(monthlyEntry);
+                }
+            }
+
+            var currentListings = new List<ItemListing>();
+            for (int i = 1; i <= 11; i++)
+            {
+                var listing = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[1]/td[1]");
+            }
+
+            if(weeklyEntries.Count != monthlyEntries.Count) 
+                throw new Exception("Parsing HTML returned an inequal amount of weekly and monthly price history entries.");
+
+            var itemHistory = new ItemHistory
+            {
+                Item = item,
+
+                WeeklyNumberSold = weeklyEntries[0],
+                WeeklyMin = weeklyEntries[1],
+                WeeklyMax = weeklyEntries[2],
+                WeeklyAverage = weeklyEntries[3],
+                WeeklyStdDeviation = weeklyEntries[4],
+
+                MonthlyNumberSold = monthlyEntries[0],
+                MonthlyMin = monthlyEntries[1],
+                MonthlyMax = monthlyEntries[2],
+                MonthlyAverage = monthlyEntries[3],
+                MonthlyStdDeviation = monthlyEntries[4],
+
+                CurrentListings = null
+            };
+
+            return itemHistory;
+        }
+
+        public static string GetDigits(string input) =>
+            new string(input.Where(c => char.IsDigit(c)).ToArray());
 
         public static string BuildMarketUrl(Item item) =>
             $"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}";
