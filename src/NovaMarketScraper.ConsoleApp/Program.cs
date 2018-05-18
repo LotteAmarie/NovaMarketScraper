@@ -19,14 +19,19 @@ namespace NovaMarketScraper.ConsoleApp
 
             var itemHistory = CreateItemHistory(item);
 
-            // foreach (var statistic in itemHistory.WeeklyStatistics)
-            // {
-            //     System.Console.WriteLine(statistic);
-            // }
+            foreach (var statistic in itemHistory.WeeklyStatistics)
+            {
+                System.Console.WriteLine(statistic);
+            }
 
             foreach (var statistic in itemHistory.MonthlyStatistics)
             {
                 System.Console.WriteLine(statistic);
+            }
+
+            foreach (var listing in itemHistory.CurrentListings)
+            {
+                System.Console.WriteLine($"{listing.Quantity} at {listing.Price}");
             }
 
             Console.ReadLine();
@@ -61,12 +66,31 @@ namespace NovaMarketScraper.ConsoleApp
             }
 
             // Scrape Current Listings
-            // var currentListings = new List<ItemListing>();
-            // for (int i = 1; i <= 11; i++)
-            // {
-            //     var listing = doc.DocumentNode
-            //             .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[1]/td[1]");
-            // }
+            var currentListings = new List<ItemListing>();
+            for (int i = 1; i <= 11; i++)
+            {
+                var listingPrice = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[{i}]/td[1]");
+                
+                var listingQty = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[{i}]/td[2]");
+
+                var listingLocation = doc.DocumentNode
+                        .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[{i}]/td[2]");
+
+                if (int.TryParse(GetDigits(listingPrice.InnerText), out int price) && 
+                    int.TryParse(GetDigits(listingQty.InnerText), out int qty))
+                {
+                    var itemListing = new ItemListing()
+                    {
+                        Price = price,
+                        Quantity = qty,
+                        Location = listingLocation.InnerText
+                    };
+
+                    currentListings.Add(itemListing);
+                }
+            }
 
             if(weeklyEntries.Count != monthlyEntries.Count) 
                 throw new Exception("Parsing HTML returned an inequal amount of weekly and monthly price history entries.");
@@ -87,7 +111,7 @@ namespace NovaMarketScraper.ConsoleApp
                 MonthlyAverage = monthlyEntries[3],
                 MonthlyStdDeviation = monthlyEntries[4],
 
-                CurrentListings = null
+                CurrentListings = currentListings
             };
 
             return itemHistory;
