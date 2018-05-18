@@ -19,7 +19,12 @@ namespace NovaMarketScraper.ConsoleApp
 
             var itemHistory = CreateItemHistory(item);
 
-            foreach (var statistic in itemHistory.WeeklyStatistics)
+            // foreach (var statistic in itemHistory.WeeklyStatistics)
+            // {
+            //     System.Console.WriteLine(statistic);
+            // }
+
+            foreach (var statistic in itemHistory.MonthlyStatistics)
             {
                 System.Console.WriteLine(statistic);
             }
@@ -49,18 +54,19 @@ namespace NovaMarketScraper.ConsoleApp
                     weeklyEntries.Add(weeklyEntry);
                 }
 
-                if (int.TryParse(GetDigits(weeklyNode.InnerText), out int monthlyEntry))
+                if (int.TryParse(GetDigits(monthlyNode.InnerText), out int monthlyEntry))
                 {
                     monthlyEntries.Add(monthlyEntry);
                 }
             }
 
-            var currentListings = new List<ItemListing>();
-            for (int i = 1; i <= 11; i++)
-            {
-                var listing = doc.DocumentNode
-                        .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[1]/td[1]");
-            }
+            // Scrape Current Listings
+            // var currentListings = new List<ItemListing>();
+            // for (int i = 1; i <= 11; i++)
+            // {
+            //     var listing = doc.DocumentNode
+            //             .SelectSingleNode($"//div/span[2]/table[2]/tbody[1]/tr[1]/td[1]");
+            // }
 
             if(weeklyEntries.Count != monthlyEntries.Count) 
                 throw new Exception("Parsing HTML returned an inequal amount of weekly and monthly price history entries.");
@@ -88,7 +94,7 @@ namespace NovaMarketScraper.ConsoleApp
         }
 
         public static string GetDigits(string input) =>
-            new string(input.Where(c => char.IsDigit(c)).ToArray());
+            new string(input.Where(char.IsDigit).ToArray());
 
         public static string BuildMarketUrl(Item item) =>
             $"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}";
