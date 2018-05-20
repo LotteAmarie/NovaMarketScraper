@@ -1,14 +1,18 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "83f4b692a467877bc58725949f1912b50685f836"
+    "signature": "23074202e039ad45a58207b0fe104c2a3be679eb"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "NovaMarketScraper.ConsoleApp/1.0.0": {
         "dependencies": {
-          "HtmlAgilityPack": "1.8.2"
+          "HtmlAgilityPack": "1.8.2",
+          "Newtonsoft.Json": "11.0.2",
+          "Selenium.Firefox.WebDriver": "0.20.0",
+          "Selenium.Support": "3.12.0",
+          "Selenium.WebDriver": "3.12.0"
         },
         "runtime": {
           "NovaMarketScraper.ConsoleApp.dll": {}
@@ -26,6 +30,11 @@
         }
       },
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Newtonsoft.Json/11.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "runtimeTargets": {
           "runtime/debian.8-x64/native/_._": {
@@ -141,6 +150,23 @@
             "rid": "ubuntu.16.10-x64",
             "assetType": "native"
           }
+        }
+      },
+      "Selenium.Firefox.WebDriver/0.20.0": {},
+      "Selenium.Support/3.12.0": {
+        "dependencies": {
+          "Selenium.WebDriver": "3.12.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.Support.dll": {}
+        }
+      },
+      "Selenium.WebDriver/3.12.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -651,6 +677,13 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/11.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+      "path": "newtonsoft.json/11.0.2",
+      "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -755,6 +788,27 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "Selenium.Firefox.WebDriver/0.20.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-x4CPkfH8V0K+kSVJWlYSBoeNUCJYCBVjMYgcku2hJz2LEHmxW83U571aoXWc+jeKZlPeVNhJzRmWoA1Uw2NTvw==",
+      "path": "selenium.firefox.webdriver/0.20.0",
+      "hashPath": "selenium.firefox.webdriver.0.20.0.nupkg.sha512"
+    },
+    "Selenium.Support/3.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AQc/09a4WeM1wGQGNBGcYaUGYyOVKj8Q5ca8EL0NiQWQcm4Hty5tGLSFDGhyUGrt7osfSl8TP0PMp+TC7z9TgA==",
+      "path": "selenium.support/3.12.0",
+      "hashPath": "selenium.support.3.12.0.nupkg.sha512"
+    },
+    "Selenium.WebDriver/3.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-c/ZC/krofDyGxMnVvcBRpuatIL7R/8Tz2D9aC9MON3XBxaYCnieDlDCkKobvrlujIJwAzIbFjrHz3kAUaGAdxg==",
+      "path": "selenium.webdriver/3.12.0",
+      "hashPath": "selenium.webdriver.3.12.0.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",

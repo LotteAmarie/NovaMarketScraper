@@ -7,6 +7,10 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using PennedObjects.RateLimiting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using Newtonsoft.Json;
 
 namespace NovaMarketScraper.ConsoleApp
 {
@@ -14,37 +18,77 @@ namespace NovaMarketScraper.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var items = new List<Item>
+            Console.ReadLine();
+        }
+
+        private static void GenerateJsonFromItemsHtml(IEnumerable<string> htmlPages)
+        {
+            var items = new List<Item>();
+            foreach (var htmlPage in htmlPages)
             {
-                FindById(4910),
-                FindById(4913),
-                FindById(4916),
-                FindById(4919),
-                FindById(4925)
-            };
+                var doc = new HtmlDocument();
+                doc.LoadHtml(htmlPage);
 
-            var historyBag = new ConcurrentBag<ItemHistory>();
+                for (int i = 2; i < 12; i++)
+                {
+                    var itemId = doc.DocumentNode.SelectSingleNode($"//div/table[2]/tbody/tr[{i}]/td[1]").InnerText.Trim();
+                    var itemName = doc.DocumentNode.SelectSingleNode($"//div/table[2]/tbody/tr[{i}]/td[3]").InnerText.Trim();
 
-            var stopwatch = new Stopwatch();
+                    System.Console.WriteLine($"{itemId}, {itemName}");
 
-            stopwatch.Start();
+                    var item = new Item
+                    {
+                        Id = Convert.ToInt32(itemId),
+                        Name = itemName
+                    };
 
-            // TODO: Rate limiting
-            Parallel.ForEach(
-                items, 
-                new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, 
-                item => historyBag.Add(CreateItemHistory(item)));
-
-            stopwatch.Stop();
-
-            foreach (var itemHistory in historyBag)
-            {
-                System.Console.WriteLine(itemHistory.Item.Name);
+                    items.Add(item);
+                }
             }
 
-            System.Console.WriteLine($"Item history generated in {stopwatch.ElapsedMilliseconds} ms");
+            File.WriteAllText("items.json", JsonConvert.SerializeObject(items, Formatting.Indented));
+        }
 
-            Console.ReadLine();
+        public static void NovaLogin(IWebDriver driver, string username, string password)
+        {
+            driver.Navigate().GoToUrl(@"https://www.novaragnarok.com/");
+
+            var txtUsername = driver.FindElement(By.CssSelector("#login > form:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > input:nth-child(1)"));
+            var txtPassword = driver.FindElement(By.CssSelector("#login > form:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(1) > input:nth-child(1)"));
+            var btnLogin = driver.FindElement(By.CssSelector("#btnlogin"));
+
+            txtUsername.SendKeys(username);
+            txtPassword.SendKeys(password);
+            btnLogin.Click();
+        }
+
+        public static void ScrapeAllItems(IWebDriver driver)
+        {
+            System.Console.Write("Enter Username: ");
+            var username = Console.ReadLine();
+
+            System.Console.Write("Enter Password: ");
+            var password = Console.ReadLine();
+
+            NovaLogin(driver, username, password);
+            GenerateJsonFromItemsHtml(GetItemsHtml(driver));
+        }
+
+        private static IEnumerable<string> GetItemsHtml(IWebDriver driver)
+        {
+            var htmlPages = new List<string>();
+            using (var rateGate = new RateGate(5, TimeSpan.FromSeconds(2)))
+            {
+                for (int i = 1; i <= 1120; i++)
+                {
+                    rateGate.WaitToProceed();
+                    driver.Navigate().GoToUrl($"https://www.novaragnarok.com/?module=item&action=index&p={i}");
+
+                    htmlPages.Add(driver.PageSource);
+                }
+            }
+
+            return htmlPages;
         }
 
         public static Item FindById(int id)
@@ -82,6 +126,7 @@ namespace NovaMarketScraper.ConsoleApp
                 }
             }
 
+            // TODO: Account for different current listing formats
             // Scrape Current Listings
             // var currentListings = new List<ItemListing>();
             // for (int i = 1; i <= 11; i++)
