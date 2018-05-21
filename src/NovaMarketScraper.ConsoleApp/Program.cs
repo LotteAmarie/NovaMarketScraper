@@ -79,7 +79,7 @@ namespace NovaMarketScraper.ConsoleApp
             var htmlPages = new List<string>();
             using (var rateGate = new RateGate(5, TimeSpan.FromSeconds(2)))
             {
-                for (int i = 1; i <= 1120; i++)
+                for (int i = 1; i <= 1120; i++) // TODO: hard-coded value
                 {
                     rateGate.WaitToProceed();
                     driver.Navigate().GoToUrl($"https://www.novaragnarok.com/?module=item&action=index&p={i}");
