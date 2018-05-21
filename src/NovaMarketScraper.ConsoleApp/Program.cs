@@ -11,6 +11,7 @@ using PennedObjects.RateLimiting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using Newtonsoft.Json;
+using NovaMarketScraper.Core.Data;
 
 namespace NovaMarketScraper.ConsoleApp
 {

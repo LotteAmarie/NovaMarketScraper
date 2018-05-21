@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NovaMarketScraper.ConsoleApp
+namespace NovaMarketScraper.Core.Data
 {
     public class ItemHistory
     {

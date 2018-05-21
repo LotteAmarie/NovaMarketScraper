@@ -1,4 +1,4 @@
-namespace NovaMarketScraper.ConsoleApp
+namespace NovaMarketScraper.Core.Data
 {
     public class Item
     {

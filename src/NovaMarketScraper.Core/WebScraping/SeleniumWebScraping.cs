@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using NovaMarketScraper.Core.Data;
 using OpenQA.Selenium;
+using PennedObjects.RateLimiting;
 
-namespace NovaMarketScraper.ConsoleApp
+namespace NovaMarketScraper.Core.WebScraping
 {
-    public class WebScraping
+    public class SeleniumWebScraping
     {
         /// <summary>
         /// Uses Selenium to scrape a Json list of all items on Nova Ragnarok Online
