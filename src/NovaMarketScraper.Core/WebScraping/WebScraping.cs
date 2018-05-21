@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
-using PennedObjects.RateLimiting;
 
 namespace NovaMarketScraper.ConsoleApp
 {
