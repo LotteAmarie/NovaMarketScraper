@@ -1,11 +1,23 @@
 namespace NovaMarketScraper.Core.Data
 {
     using System.Collections.Generic;
-    public class ItemHistory
+    using HtmlAgilityPack;
+    using NovaMarketScraper.Core.Utility;
+    public class ItemReport
     {
-        public Item Item { get; set; }
+        private HtmlDocument _doc;
+        private int _weeklyNumberSold;
 
-        public IEnumerable<int> WeeklyStatistics 
+        public ItemReport(Item item)
+        {
+            Item = item;
+            var web = new HtmlWeb();
+            _doc = web.Load($"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}");
+        }
+
+        public Item Item { get; private set; }
+
+        public IEnumerable<int> WeeklyStatistics
         {
             get
             {
@@ -21,13 +33,73 @@ namespace NovaMarketScraper.Core.Data
             }
         }
 
-        public int WeeklyNumberSold { get; set; }
-        public int WeeklyMin { get; set; }
-        public int WeeklyMax { get; set; }
-        public int WeeklyAverage { get; set; }
-        public int WeeklyStdDeviation { get; set; }
+        public int WeeklyNumberSold 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[1]/td[2]").InnerText;
 
-        public IEnumerable<int> MonthlyStatistics 
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int WeeklyMin 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[1]/td[3]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int WeeklyMax 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[1]/td[4]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int WeeklyAverage 
+        {
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[1]/td[5]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int WeeklyStdDeviation
+        {
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[1]/td[6]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+
+        public IEnumerable<int> MonthlyStatistics
         {
             get
             {
@@ -42,12 +114,72 @@ namespace NovaMarketScraper.Core.Data
                 return statistics;
             }
         }
-        
-        public int MonthlyNumberSold { get; set; }
-        public int MonthlyMin { get; set; }
-        public int MonthlyMax { get; set; }
-        public int MonthlyAverage { get; set; }
-        public int MonthlyStdDeviation { get; set; }
+
+        public int MonthlyNumberSold 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[2]/td[2]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int MonthlyMin 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[2]/td[3]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int MonthlyMax 
+        { 
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[2]/td[4]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int MonthlyAverage 
+        {
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[2]/td[5]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
+        public int MonthlyStdDeviation
+        {
+            get 
+            {
+                var valueNode = _doc.DocumentNode
+                    .SelectSingleNode("//div/span[2]/table[1]/tbody/tr[2]/td[6]").InnerText;
+
+                if (int.TryParse(valueNode.GetDigits(), out int value))
+                    return value;
+
+                return -1;
+            }
+        }
 
         public List<ItemListing> CurrentListings { get; set; }
     }

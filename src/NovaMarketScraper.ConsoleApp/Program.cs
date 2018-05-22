@@ -22,14 +22,7 @@ namespace NovaMarketScraper.ConsoleApp
             Console.ReadLine();
         }
         
-        public static Item FindById(int id)
-        {
-            var items = LoadItems();
-
-            return items.FirstOrDefault(x => x.Id == id);
-        }
-
-        public static ItemHistory CreateItemHistory(Item item)
+        public static ItemReport CreateItemHistory(Item item)
         {
             // Fetch HTML
             var web = new HtmlWeb();
@@ -88,7 +81,7 @@ namespace NovaMarketScraper.ConsoleApp
             if(weeklyEntries.Count != monthlyEntries.Count) 
                 throw new Exception("Parsing HTML returned an inequal amount of weekly and monthly price history entries.");
 
-            var itemHistory = new ItemHistory
+            var itemHistory = new ItemReport
             {
                 Item = item,
 
@@ -115,27 +108,5 @@ namespace NovaMarketScraper.ConsoleApp
 
         public static string BuildMarketUrl(Item item) =>
             $"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}";
-
-        public static IEnumerable<Item> LoadItems()
-        {
-            var itemStrings = File.ReadLines(@"items.txt");
-
-            var items = new List<Item>();
-            foreach (var itemString in itemStrings)
-            {
-                var strings = itemString.Split(',');
-
-                var item = new Item
-                {
-                    Id = Convert.ToInt32(strings[0]),
-                    Name = strings[1],
-                    Slots = Convert.ToInt32(strings[2])
-                };
-
-                items.Add(item);
-            }
-
-            return items;
-        }
     }
 }
