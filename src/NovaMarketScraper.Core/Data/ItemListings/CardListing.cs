@@ -1,6 +1,8 @@
+using NovaMarketScraper.Core.Data;
+
 namespace NovaMarketScraper.Core.Data
 {
-    public class CardListing
+    public class CardListing : IListing
     {
         public Item ItemOf { get; set; }
 

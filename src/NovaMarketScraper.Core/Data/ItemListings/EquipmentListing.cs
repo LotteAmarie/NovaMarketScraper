@@ -1,8 +1,8 @@
 namespace NovaMarketScraper.Core.Data
 {
-    public class EquipmentListing
+    public class EquipmentListing : IListing
     {
-        public Item Item { get; set; }
+        public Item ItemOf { get; set; }
 
         public int Price { get; set; }
         public int Refine { get; set; }
