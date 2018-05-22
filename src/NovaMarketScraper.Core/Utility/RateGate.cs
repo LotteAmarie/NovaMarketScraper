@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Threading;
-
-namespace PennedObjects.RateLimiting
+﻿namespace PennedObjects.RateLimiting
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Threading;
+
     /// <summary>
     /// Used to control the rate of some occurrence per unit of time.
     /// </summary>

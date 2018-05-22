@@ -1,13 +1,18 @@
-using System;
-using System.Collections.Generic;
-using HtmlAgilityPack;
-using Newtonsoft.Json;
-using NovaMarketScraper.Core.Data;
-using OpenQA.Selenium;
-using PennedObjects.RateLimiting;
-
 namespace NovaMarketScraper.Core.WebScraping
 {
+    using System;
+    using System.Collections.Generic;
+    using HtmlAgilityPack;
+    using Newtonsoft.Json;
+    using NovaMarketScraper.Core.Data;
+    using OpenQA.Selenium;
+    using PennedObjects.RateLimiting;
+
+    /// <summary>
+    /// Class containing all the code needed to scrape Nova Ragnarok's item indexes. 
+    /// Because these indexes are behind a login, selenium is required to more easily get
+    /// at the HTML source.
+    /// </summary>
     public class SeleniumWebScraping
     {
         /// <summary>

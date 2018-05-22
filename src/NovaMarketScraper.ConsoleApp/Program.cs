@@ -19,6 +19,9 @@ namespace NovaMarketScraper.ConsoleApp
     {
         static void Main(string[] args)
         {
+            var items = new ItemList();
+            System.Console.WriteLine(items.FindItemById(4910).Name);
+
             Console.ReadLine();
         }
         

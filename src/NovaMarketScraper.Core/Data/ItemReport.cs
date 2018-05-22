@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-
 namespace NovaMarketScraper.Core.Data
 {
+    using System.Collections.Generic;
     public class ItemHistory
     {
         public Item Item { get; set; }
@@ -21,6 +20,7 @@ namespace NovaMarketScraper.Core.Data
                 return statistics;
             }
         }
+
         public int WeeklyNumberSold { get; set; }
         public int WeeklyMin { get; set; }
         public int WeeklyMax { get; set; }
@@ -42,6 +42,7 @@ namespace NovaMarketScraper.Core.Data
                 return statistics;
             }
         }
+        
         public int MonthlyNumberSold { get; set; }
         public int MonthlyMin { get; set; }
         public int MonthlyMax { get; set; }
