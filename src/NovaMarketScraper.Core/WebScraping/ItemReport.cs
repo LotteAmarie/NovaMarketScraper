@@ -1,7 +1,9 @@
-namespace NovaMarketScraper.Core.Data
+namespace NovaMarketScraper.Core.WebScraping
 {
+    using System;
     using System.Collections.Generic;
     using HtmlAgilityPack;
+    using NovaMarketScraper.Core.Data;
     using NovaMarketScraper.Core.Utility;
     public class ItemReport
     {
@@ -181,6 +183,12 @@ namespace NovaMarketScraper.Core.Data
             }
         }
 
-        public List<ItemListing> CurrentListings { get; set; }
+        public List<ItemListing> CurrentListings
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
