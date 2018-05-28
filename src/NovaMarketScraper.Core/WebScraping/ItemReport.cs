@@ -4,11 +4,11 @@ namespace NovaMarketScraper.Core.WebScraping
     using System.Collections.Generic;
     using HtmlAgilityPack;
     using NovaMarketScraper.Core.Data;
+    using NovaMarketScraper.Core.Data.ItemListings;
     using NovaMarketScraper.Core.Utility;
     public class ItemReport
     {
         private HtmlDocument _doc;
-        private int _weeklyNumberSold;
 
         public ItemReport(Item item)
         {
@@ -183,11 +183,11 @@ namespace NovaMarketScraper.Core.WebScraping
             }
         }
 
-        public List<ItemListing> CurrentListings
+        public IEnumerable<IListing> CurrentListings
         {
             get
             {
-                throw new NotImplementedException();
+                return ListingFactory.CreateListings(_doc.DocumentNode.SelectSingleNode("//div/span[2]/table[2]"), this.Item);
             }
         }
     }

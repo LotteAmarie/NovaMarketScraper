@@ -2,8 +2,8 @@ namespace NovaMarketScraper.Core.Data
 {
     public interface IListing
     {
-        Item ItemOf { get; set; }
-        int Price { get; set; }
-        string Location { get; set; }
+        Item ItemOf { get; }
+        int Price { get; }
+        string Location { get; }
     }
 }

@@ -2,15 +2,26 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 using NovaMarketScraper.Core.Data;
 using NovaMarketScraper.Core.WebScraping;
+using NovaMarketScraper.Core.Utility;
+using System.Text;
+using System.Linq;
+using NovaMarketScraper.Core.Data.ItemListings;
 
 namespace NovaMarketScraper.ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            Benchmark();
+        }
+
+        private static void Benchmark()
         {
             var stopwatch = new Stopwatch();
 
@@ -28,7 +39,8 @@ namespace NovaMarketScraper.ConsoleApp
             };
 
             var reports = new ConcurrentBag<ItemReport>();
-            Parallel.ForEach(itemsToLookUp, new ParallelOptions { MaxDegreeOfParallelism = 4 }, item => {
+            Parallel.ForEach(itemsToLookUp, new ParallelOptions { MaxDegreeOfParallelism = 4 }, item =>
+            {
                 reports.Add(new ItemReport(item));
             });
 

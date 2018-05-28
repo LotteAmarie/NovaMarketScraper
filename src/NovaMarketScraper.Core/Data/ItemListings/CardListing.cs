@@ -4,12 +4,23 @@ namespace NovaMarketScraper.Core.Data
 {
     public class CardListing : IListing
     {
-        public Item ItemOf { get; set; }
+        internal CardListing(Item itemOf, Item itemIn, int price, int refine, string additionalProperties, string location)
+        {
+            this.ItemOf = itemOf;
+            this.ItemIn = itemIn;
+            this.Price = price;
+            this.Refine = refine;
+            this.AdditionalProperties = additionalProperties;
+            this.Location = location;
 
-        public Item ItemIn { get; set; }
-        public int Price { get; set; }
-        public int Refine { get; set; }
-        public string AdditionalProperties { get; set; }
-        public string Location { get; set; }
+        }
+
+        public Item ItemOf { get; }
+
+        public Item ItemIn { get; }
+        public int Price { get; }
+        public int Refine { get; }
+        public string AdditionalProperties { get; }
+        public string Location { get; }
     }
 }
