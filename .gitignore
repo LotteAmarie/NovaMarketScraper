@@ -36,3 +36,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.vscode/tasks.json
+.vscode/settings.json
+.vscode/launch.json
