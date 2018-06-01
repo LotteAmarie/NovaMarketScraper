@@ -10,7 +10,7 @@ namespace NovaMarketScraper.Core.WebScraping
     {
         private HtmlDocument _doc;
 
-        public ItemReport(Item item)
+        internal ItemReport(Item item)
         {
             Item = item;
             var web = new HtmlWeb();

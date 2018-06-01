@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NovaMarketScraper.Core.Data;
+using NovaMarketScraper.Core.Utility;
 using NovaMarketScraper.Core.WebScraping;
 using PennedObjects.RateLimiting;
 
@@ -16,8 +17,7 @@ namespace NovaMarketScraper.Core
         {
             _watched = watchedItems;
         }
-
-        public IEnumerable<(IListing listing, int percentage)> CheckBelowMonthlyAverage(uint threshold)
+        public IEnumerable<(IListing listing, int percentage)> GetBelowWeeklyAverage(uint threshold)
         {
             if (threshold > 100) throw new ArgumentException("Threshold is a percentage value and must range between 0-100.");
 
@@ -25,19 +25,32 @@ namespace NovaMarketScraper.Core
             var listings = new ConcurrentBag<(IListing listing, int percentage)>();
             foreach (var report in reports)
             {
-                var targetPrice = report.MonthlyAverage * (1 - (threshold/100));
+                Parallel.ForEach(report.CurrentListings, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, listing => {
+                    if (listing.IsBelowAverage(report.WeeklyAverage, threshold))
+                        listings.Add((listing, PercentChange(listing.Price, report.WeeklyAverage)));
+                });
+            }
 
-                Parallel.ForEach(report.CurrentListings, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, listing => {                   
-                    if (listing is CardListing && ((CardListing)listing).ItemIn.Id == ((CardListing)listing).ItemOf.Id)
-                        if (listing.Price <= targetPrice - 2000000)
-                            listings.Add((listing, PercentChange(listing.Price + 2000000, report.MonthlyAverage)));
-                    else if (listing.Price <= targetPrice)
+            return listings;
+        }
+
+        public IEnumerable<(IListing listing, int percentage)> GetBelowMonthlyAverage(uint threshold)
+        {
+            if (threshold > 100) throw new ArgumentException("Threshold is a percentage value and must range between 0-100.");
+
+            var reports = GenerateReports();
+            var listings = new ConcurrentBag<(IListing listing, int percentage)>();
+            foreach (var report in reports)
+            {
+                Parallel.ForEach(report.CurrentListings, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, listing => {
+                    if (listing.IsBelowAverage(report.MonthlyAverage, threshold))
                         listings.Add((listing, PercentChange(listing.Price, report.MonthlyAverage)));
                 });
             }
 
             return listings;
         }
+
 
         private IEnumerable<ItemReport> GenerateReports()
         {
@@ -53,9 +66,7 @@ namespace NovaMarketScraper.Core
             return reports;
         }
 
-        private int PercentChange(int listingPrice, int average)
-        {
-            return (int)(((double)(average - listingPrice) / (double)average) * 100.0);
-        }
-     }
+        private int PercentChange(int listingPrice, int average) 
+            => (int)(((double)(average - listingPrice) / (double)average) * 100.0);
+    }
 }

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaMarketScraper.ConsoleAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaMarketScraper.Core", "src\NovaMarketScraper.Core\NovaMarketScraper.Core.csproj", "{498E345C-6283-4AB0-9DD6-4AC6DD3639B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B0C52DBB-B1F2-4FC1-AF1D-944EB1FC5AAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaMarketScraper.Core.Tests", "test\NovaMarketScraper.Core.Tests\NovaMarketScraper.Core.Tests.csproj", "{580C98BF-568E-4533-9D19-C3CD305E73C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +50,22 @@ Global
 		{498E345C-6283-4AB0-9DD6-4AC6DD3639B9}.Release|x64.Build.0 = Release|x64
 		{498E345C-6283-4AB0-9DD6-4AC6DD3639B9}.Release|x86.ActiveCfg = Release|x86
 		{498E345C-6283-4AB0-9DD6-4AC6DD3639B9}.Release|x86.Build.0 = Release|x86
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|x64.ActiveCfg = Debug|x64
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|x64.Build.0 = Debug|x64
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|x86.ActiveCfg = Debug|x86
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Debug|x86.Build.0 = Debug|x86
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|x64.ActiveCfg = Release|x64
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|x64.Build.0 = Release|x64
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|x86.ActiveCfg = Release|x86
+		{580C98BF-568E-4533-9D19-C3CD305E73C1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{654B1D7A-F4B7-4694-A4F5-335BE30664DF} = {091DAF39-21BE-4FA5-9D03-0E63D54B6ADB}
 		{498E345C-6283-4AB0-9DD6-4AC6DD3639B9} = {091DAF39-21BE-4FA5-9D03-0E63D54B6ADB}
+		{580C98BF-568E-4533-9D19-C3CD305E73C1} = {B0C52DBB-B1F2-4FC1-AF1D-944EB1FC5AAE}
 	EndGlobalSection
 EndGlobal
