@@ -32,7 +32,7 @@ namespace NovaMarketScraper.ConsoleApp
 
             var watchList = new WatchList(itemsToLookUp);
 
-            var results = watchList.CheckBelowMonthlyAverage(15);
+            var results = watchList.GetBelowMonthlyAverage(15);
 
             foreach (var result in results)
             {

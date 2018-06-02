@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NovaMarketScraper.Core.Data;
 using NovaMarketScraper.Core.Utility;
@@ -17,6 +18,7 @@ namespace NovaMarketScraper.Core
         {
             _watched = watchedItems;
         }
+        
         public IEnumerable<(IListing listing, int percentage)> GetBelowWeeklyAverage(uint threshold)
         {
             if (threshold > 100) throw new ArgumentException("Threshold is a percentage value and must range between 0-100.");
@@ -50,7 +52,6 @@ namespace NovaMarketScraper.Core
 
             return listings;
         }
-
 
         private IEnumerable<ItemReport> GenerateReports()
         {

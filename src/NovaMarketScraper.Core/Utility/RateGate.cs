@@ -21,7 +21,7 @@
     ///     threads.
     ///     </para>
     /// </remarks>
-    public class RateGate : IDisposable
+    internal class RateGate : IDisposable
     {
         // Semaphore used to count and limit the number of occurrences per
         // unit time.
