@@ -20,7 +20,8 @@ namespace NovaMarketScraper.Core.WebScraping
             get
             {
                 var items = new ItemList();
-                var itemIdString = _doc.DocumentNode.SelectSingleNode("//div/span[2]/h2").InnerText.GetDigits();
+                var itemString = _doc.DocumentNode.SelectSingleNode("//div/span[2]/h2").InnerText;
+                var itemIdString = itemString.Split('•')[1].GetDigits();
 
                 if (int.TryParse(itemIdString, out int itemId))
                 {

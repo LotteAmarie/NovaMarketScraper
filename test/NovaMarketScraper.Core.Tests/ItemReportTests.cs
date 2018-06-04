@@ -23,12 +23,12 @@ namespace NovaMarketScraper.Core.Tests
         public void Item_ScrapesCorrectly()
         {
             //Given
-            _doc.Load("./Data/oridecon.html");
+            _doc.Load("./Data/EoEStr3.html");
             var report = new ItemReport(_doc);
             var expected = new Item
             {
-                Name = "Oridecon",
-                Id = 984,
+                Name = "Essence Of Evil STR 3",
+                Id = 4910,
                 Slots = 0
             };
 
@@ -200,7 +200,7 @@ namespace NovaMarketScraper.Core.Tests
 #endregion
 
         [Fact]
-        public void CurrentListings_ScrapedCorrectly()
+        public void ItemListings_ScrapedCorrectly()
         {
             //Given
             _doc.Load("./Data/oridecon.html");
@@ -227,6 +227,7 @@ namespace NovaMarketScraper.Core.Tests
                 new ItemListing(itemOf, 21000, 400, "newvending,70,60"),
                 new ItemListing(itemOf, 21450, 148, "gonryun,146,111")
             };
+
             //When
             var actual = report.CurrentListings.ToList();
 
@@ -236,8 +237,53 @@ namespace NovaMarketScraper.Core.Tests
                 Assert.Equal(expected[i].ItemOf.Id, actual[i].ItemOf.Id);
                 Assert.Equal(expected[i].Location, actual[i].Location);
                 Assert.Equal(expected[i].Price, actual[i].Price);
+                Assert.Equal(expected[i].Quantity, (actual[i] as ItemListing).Quantity);
             }
         }
 
+        [Fact]
+        public void CardListings_ScrapedCorrectly()
+        {
+            //Given
+            _doc.Load("./Data/EoEStr3.html");
+            var report = new ItemReport(_doc);
+
+            var itemOf = new Item
+            {
+                Name = "Essence Of Evil STR 3",
+                Id = 4910,
+                Slots = 0
+            };
+
+            var expected = new List<CardListing>
+            {
+                new CardListing(itemOf, itemOf, 7900000, 0, "None", "newvending,66,154"),
+                new CardListing(itemOf, itemOf, 8000000, 0, "None", "aldebaran,124,121"),
+                new CardListing(itemOf, itemOf, 8000000, 0, "None", "newvending,86,41"),
+                new CardListing(itemOf, itemOf, 8000000, 0, "None", "niflheim,182,177"),
+                new CardListing(itemOf, itemOf, 8000000, 0, "None", "gonryun,146,113"),
+                new CardListing(itemOf, itemOf, 8000000, 0, "None", "splendide,211,127"),
+                new CardListing(itemOf, itemOf, 10000000, 0, "None", "newvending,66,145"),
+                new CardListing(itemOf, new Item { Name = "Rideword Hat [1]", Id = 5208, Slots = 0 }, 10000000, 4, "Essence Of Evil STR 3", "newvending,90,126"),
+                new CardListing(itemOf, new Item { Name = "Rideword Hat [1]", Id = 5208, Slots = 0 }, 12000000, 4, "Essence Of Evil STR 3", "newvending,62,207"),
+                new CardListing(itemOf, new Item { Name = "Rideword Hat [1]", Id = 5208, Slots = 0 }, 14000000, 4, "Essence Of Evil STR 3", "newvending,103,66"),
+                new CardListing(itemOf, new Item { Name = "Ship Captain's Hat [1]", Id = 5359, Slots = 0 }, 28500000, 0,"Essence Of Evil STR 3", "newvending,111,60")
+            };
+
+            //When
+            var actual = report.CurrentListings.ToList();
+
+            //Then
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.Equal(expected[i].ItemOf.Id, actual[i].ItemOf.Id);
+                Assert.Equal(expected[i].Location, actual[i].Location);
+                Assert.Equal(expected[i].Price, actual[i].Price);
+
+                Assert.Equal(expected[i].ItemIn.Id, (actual[i] as CardListing).ItemIn.Id);
+                Assert.Equal(expected[i].Refine, (actual[i] as CardListing).Refine);
+                Assert.Equal(expected[i].AdditionalProperties, (actual[i] as CardListing).AdditionalProperties);
+            }
+        }
     }
 }

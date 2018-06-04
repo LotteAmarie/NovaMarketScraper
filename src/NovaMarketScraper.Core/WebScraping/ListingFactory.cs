@@ -7,7 +7,8 @@ namespace NovaMarketScraper.Core.Data.ItemListings
 {
     public static class ListingFactory
     {
-        public static IEnumerable<IListing> CreateListings(HtmlNode table, Item itemOf)
+        //TODO: Refactoring
+        internal static IEnumerable<IListing> CreateListings(HtmlNode table, Item itemOf)
         {
             var listings = new List<IListing>();
             var listingCount = table.SelectNodes(".//tr").Count;
@@ -26,6 +27,7 @@ namespace NovaMarketScraper.Core.Data.ItemListings
                     var location = table.SelectSingleNode($".//tr[{i}]/td[5]").InnerText.Trim();
 
                     if (itemInId == -1) throw new InvalidOperationException(""); // TODO:
+                    
                     itemIn = items.FindItemById(itemInId);
 
                     if (int.TryParse(priceString, out int price) && int.TryParse(refineString, out int refine))

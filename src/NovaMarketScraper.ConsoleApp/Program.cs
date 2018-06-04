@@ -12,6 +12,7 @@ using System.Text;
 using System.Linq;
 using NovaMarketScraper.Core.Data.ItemListings;
 using NovaMarketScraper.Core;
+using System.IO;
 
 namespace NovaMarketScraper.ConsoleApp
 {
