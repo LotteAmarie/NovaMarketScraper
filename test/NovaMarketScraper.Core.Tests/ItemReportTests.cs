@@ -236,7 +236,6 @@ namespace NovaMarketScraper.Core.Tests
                 Assert.Equal(expected[i].ItemOf.Id, actual[i].ItemOf.Id);
                 Assert.Equal(expected[i].Location, actual[i].Location);
                 Assert.Equal(expected[i].Price, actual[i].Price);
-                Assert.Equal(expected[i].Quantity, (actual[i] as ItemListing).Quantity);
             }
         }
 
