@@ -4,7 +4,7 @@ namespace NovaMarketScraper.Core.Data
 {
     public class CardListing : IListing
     {
-        internal CardListing(Item itemOf, Item itemIn, int price, int refine, string additionalProperties, string location)
+        public CardListing(Item itemOf, Item itemIn, int price, int refine, string additionalProperties, string location)
         {
             this.ItemOf = itemOf;
             this.ItemIn = itemIn;
@@ -12,7 +12,6 @@ namespace NovaMarketScraper.Core.Data
             this.Refine = refine;
             this.AdditionalProperties = additionalProperties;
             this.Location = location;
-
         }
 
         public Item ItemOf { get; }

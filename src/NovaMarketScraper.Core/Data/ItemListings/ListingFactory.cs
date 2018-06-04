@@ -53,7 +53,7 @@ namespace NovaMarketScraper.Core.Data.ItemListings
                 {
                     var priceString = table.SelectSingleNode($".//tr[{i}]/td[1]").InnerText.GetDigits();
                     var qtyString = table.SelectSingleNode($".//tr[{i}]/td[2]").InnerText.GetDigits();
-                    var location = table.SelectSingleNode($".//tr[{i}]/td[3]").InnerText.GetDigits();
+                    var location = table.SelectSingleNode($".//tr[{i}]/td[3]").InnerText.Trim();
 
                     if (int.TryParse(priceString, out int price) && int.TryParse(qtyString, out int qty))
                         listings.Add(new ItemListing(itemOf, price, qty, location));

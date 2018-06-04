@@ -10,14 +10,26 @@ namespace NovaMarketScraper.Core.WebScraping
     {
         private HtmlDocument _doc;
 
-        internal ItemReport(Item item)
+        public ItemReport(HtmlDocument doc)
         {
-            Item = item;
-            var web = new HtmlWeb();
-            _doc = web.Load($"https://www.novaragnarok.com/?module=vending&action=item&id={item.Id}");
+            _doc = doc;
         }
 
-        public Item Item { get; private set; }
+        public Item Item 
+        { 
+            get
+            {
+                var items = new ItemList();
+                var itemIdString = _doc.DocumentNode.SelectSingleNode("//div/span[2]/h2").InnerText.GetDigits();
+
+                if (int.TryParse(itemIdString, out int itemId))
+                {
+                    return items.FindItemById(itemId);
+                }
+
+                throw new Exception("Item not found"); // TODO: better exception type
+            }
+        }
 
         public IEnumerable<int> WeeklyStatistics
         {

@@ -22,22 +22,32 @@ namespace NovaMarketScraper.ConsoleApp
             var items = new ItemList();
             var itemsToLookUp = new List<Item>
             {
-                items.FindItemById(4910),
-                items.FindItemById(4913),
-                items.FindItemById(4916),
-                items.FindItemById(4919),
-                items.FindItemById(4922),
-                items.FindItemById(4925)
+                items.FindItemById(6226),
+                items.FindItemById(12432),
+                items.FindItemById(607),
+                items.FindItemById(12433),
+                items.FindItemById(6672),
+                items.FindItemById(6962),
+                items.FindItemById(6607),
+                items.FindItemById(6380),
+                items.FindItemById(984),
+                items.FindItemById(7620),
+                items.FindItemById(7619),
+                items.FindItemById(6755),
+                items.FindItemById(6608),
+                items.FindItemById(12103),
+                items.FindItemById(671),
+                items.FindItemById(6671)
             };
 
-            var watchList = new WatchList(itemsToLookUp);
+            // var watchList = new WatchList(itemsToLookUp);
 
-            var results = watchList.GetBelowMonthlyAverage(15);
+            // var results = watchList.GetBelowWeeklyAverage(15);
 
-            foreach (var result in results)
-            {
-                System.Console.WriteLine($"{result.listing.ItemOf.Name} found at {result.listing.Price:N0}, {result.percentage}% or more below the monthly average.");
-            }
+            // foreach (var result in results)
+            // {
+            //     System.Console.WriteLine($"{result.listing.ItemOf.Name} found at {result.listing.Price:N0}, {result.percentage}% or more below the monthly average.");
+            // }
 
             Console.ReadLine();
         }
